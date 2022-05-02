@@ -7,36 +7,37 @@
 // @lc code=start
 
 var MinStack = function() {
-    
+    this.elements = [];
 };
 
 /** 
  * @param {number} val
  * @return {void}
  */
+
 MinStack.prototype.push = function(val) {
-    
+    this.elements.push([val, this.elements.length === 0 ? val : Math.min(val, this.getMin())])
 };
 
 /**
  * @return {void}
  */
 MinStack.prototype.pop = function() {
-    
+    return this.elements.pop();
 };
 
 /**
  * @return {number}
  */
 MinStack.prototype.top = function() {
-    
+    return this.elements[this.elements.length - 1][0]
 };
 
 /**
  * @return {number}
  */
 MinStack.prototype.getMin = function() {
-    
+    return this.elements[this.elements.length - 1][1]
 };
 
 /** 
