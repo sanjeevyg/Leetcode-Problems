@@ -10,16 +10,17 @@
  * @return {number}
  */
 var countPrimes = function(n) {
-    let seen = {}, ans = 0
-    for (let num = 2; num < n; num++) {
-        if (seen[num]) continue
-        ans++
-        for (let mult = num * num; mult < n; mult += num)
-            seen[mult] = 1
+    let seen = new Array(n).fill(false);
+    let primes = 0;
+    for(let i = 2; i < n; i++) {
+        if(seen[i]) continue;
+        primes += 1;
+        for(let mult = i * i; mult < n; mult += i) {
+            seen[mult] = true
+        }
     }
-    return ans
+    return primes
 };
-
 // console.log(countPrimes(10))
-// @lc code=end
+// // @lc code=end
 
