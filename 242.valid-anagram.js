@@ -11,30 +11,19 @@
  * @return {boolean}
  */
 var isAnagram = function(s, t) {
-    if(s.length !== t.length) return false;
-    let sMap = new Map();
-    let tMap = new Map();
+   if(s.length !== t.length) return false;
+   let count = {};
 
-    for(let i=0; i < s.length; i++) {
-        if(!sMap.has(s[i])) {
-            sMap.set(s[i], 1);
-        } else {
-            sMap.set(s[i], sMap.get(s[i]) + 1);
-        }
-    }
+   for(let c of s) {
+       count[c] ? count[c] = count[c] + 1 : count[c] = 1;
+   }
 
-    for(let j=0; j < t.length; j++) {
-        if(!tMap.has(t[j])) {
-            tMap.set(t[j], 1);
-        } else {
-            tMap.set(t[j], tMap.get(t[j]) + 1);
-        }
-    }
+   for(let c of t) {
+       if(!count[c]) return false;
+       count[c]--;
+   }
 
-    for(let k=0; k < t.length; k++) {
-        if(sMap.get(t[k]) !== tMap.get(t[k])) return false;
-    }
-    return true;
+   return true;
 };
 
 // @lc code=end
