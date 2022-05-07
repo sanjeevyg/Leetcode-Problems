@@ -11,13 +11,17 @@
  */
 var findDisappearedNumbers = function(nums) {
     let n = nums.length;
-    let arr = [];
+    let map = new Map();
+    let ans = [];
 
-    for(let i = 1; i <= n; i++) {
-        if(!nums.includes[i]) arr.push(i)
+    for(let i = 0; i < n; i++) {
+        map.set(nums[i], true)
     }
 
-    return arr
+    for(let j = 1; j <= n; j++) {
+        if(!map.has(j)) ans.push(j)
+    }
+    return ans
 };
 
 // console.log(findDisappearedNumbers([4,3,2,7,8,2,3,1]))
