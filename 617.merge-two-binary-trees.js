@@ -18,16 +18,34 @@
  * @param {TreeNode} root2
  * @return {TreeNode}
  */
-let resultNode = new TreeNode()
 var mergeTrees = function(root1, root2) {
     if(root1 == null && root2 == null) return null;
     if(root1 == null) return root2;
     if(root2 == null) return root1;
-    resultNode.val = root1.val + root2.val
-    resultNode.left = mergeTrees(root1.left + root2.left) 
-    resultNode.right = mergeTrees(root1.right + root2.right) 
-    return resultNode;
+
+    let stack = [root1, root2]
+
+    while(stack.length > 0) {
+        let first = stack.pop();
+        let second = stack.pop();
+
+        second.val += first.val
+
+        if(first === null && second === null) continue;
+
+        if(first.left && second.left) {
+            stack.push(second.left)
+            stack.push(first.left)
+        }
+        if(first.left && !second.left) second.left = first.left;
+
+        if(first.right && second.right) {
+            stack.push(second.right)
+            stack.push(first.right)
+        }
+        if(first.right && !second.right) second.right = first.right;
+    }
+    return root1;
 };
-// console.log(mergeTrees([1,3,2,5],[2,1,3,null,4,null,7]))
 // @lc code=end
 
