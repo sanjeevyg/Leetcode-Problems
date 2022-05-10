@@ -23,28 +23,19 @@ var trimBST = function(root, low, high) {
     let node = new TreeNode();
     node.left = root;
     node.right = null;
-    let stack = [node.left];
+    let stack = [node.left, node.right];
 
     while(stack.length > 0) {
         let current = stack.pop();
         
         if(current.right  != null && (current.right.val < low || current.right.val > high)) {
-            if(current.right != null) {
-                current.right.right = null;
-                stack.push(current.right)
-            } else {
-                current.right = null;
-            }
+            current.right = null;
+            stack.push(current.right)
         }
         if(current.left  != null && (current.left.val < low || current.left.val > high)) {
-            if(current.left != null) {
-                current.left.left = null;
-                stack.push(current.left)
-            } else {
-                current.left = null;
-            }
+           current.left = null;
         }
-        
+
     }
     return node.left
 };
