@@ -20,24 +20,12 @@
  * @return {TreeNode}
  */
 var trimBST = function(root, low, high) {
-    let node = new TreeNode();
-    node.left = root;
-    node.right = null;
-    let stack = [node.left, node.right];
-
-    while(stack.length > 0) {
-        let current = stack.pop();
-        
-        if(current.right  != null && (current.right.val < low || current.right.val > high)) {
-            current.right = null;
-            stack.push(current.right)
-        }
-        if(current.left  != null && (current.left.val < low || current.left.val > high)) {
-           current.left = null;
-        }
-
-    }
-    return node.left
+    if(root === null) return root;
+    if(root.val > high) return trimBST(root.left, low, high)
+    if(root.val < low) return trimBST(root.right, low, high)
+    root.left = trimBST(root.left, low, high)
+    root.right = trimBST(root.right, low, high)
+    return root;
 };
 // @lc code=end
 
