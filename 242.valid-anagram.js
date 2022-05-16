@@ -11,20 +11,21 @@
  * @return {boolean}
  */
 var isAnagram = function(s, t) {
-   if(s.length !== t.length) return false;
-   let count = {};
+    if(s.length !== t.length) return false;
+    let obj = {};
 
-   for(let c of s) {
-       count[c] ? count[c] = count[c] + 1 : count[c] = 1;
-   }
+    for(let letter of s) {
+        obj[letter] ? obj[letter] += 1 : obj[letter] = 1;
+    }
 
-   for(let c of t) {
-       if(!count[c]) return false;
-       count[c]--;
-   }
-
-   return true;
+    for(let ele of t) {
+        if(!obj[ele]) {
+            return false
+        } else {
+            obj[ele]--
+        }
+    }
+    return true;
 };
-
 // @lc code=end
 
