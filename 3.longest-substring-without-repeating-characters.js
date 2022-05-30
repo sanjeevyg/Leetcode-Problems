@@ -10,44 +10,35 @@
  * @return {number}
  */
 var lengthOfLongestSubstring = function(s) {
-    if(s === "") return 0;
-    //Initiate a map to track the longest substring
-    //Iterate through the substring and make substring and add it to map before breaking at repitition
-    //Iterate through the map and return the substring with largest value
-    let map = new Map();
-    let count = 0;
     let set = new Set();
-    let str = "";
-    let max = 0;
+    let maxLength = 0;
+    let substrLength = 0;
 
-    while(count < s.length) {
-        console.log(s[count])
-        if(set.has(s[count])) {
-            map.set(str, max)
+    for(let i = 0; i < s.length; i++) {
+        if(s[i] === s[i - 1]) {
+            substrLength = 0;
             set.clear()
-            max = 0;
-            str = "";
+            // set.add(s[i])
+        }
+
+        if(set.has(s[i])) {
+            substrLength = 0;
+            set.clear()
             continue;
         }
-        if(s[count] === " ") {
-            set.add(" ")
-            str += " "
-        } else {
-            set.add(s[count])
-            str += s[count]
-        }
-        max++
-        count++
+        set.add(s[i])
+        substrLength = substrLength + 1
+        // console.log("subs", substrLength)
+        maxLength = Math.max(substrLength, maxLength)
     }
-    // console.log(map)
-
-    let maxLength = Math.max(...map.values())
-
     return maxLength
-
 };
-console.log(lengthOfLongestSubstring("abcabcb b"))
-console.log(lengthOfLongestSubstring(""))
-console.log(lengthOfLongestSubstring(" "))
+// console.log(lengthOfLongestSubstring("abcabcbb"))
+// console.log(lengthOfLongestSubstring(""))
+// console.log(lengthOfLongestSubstring(" "))
+// console.log(lengthOfLongestSubstring("pwwkew"))
+// console.log(lengthOfLongestSubstring("aab"))
+// console.log(lengthOfLongestSubstring("bbbbb"))
+console.log(lengthOfLongestSubstring("dvdf"))
 // @lc code=end
 
