@@ -12,7 +12,8 @@
 var findMinDifference = function(timePoints) {
     let convert = (hrs) => {
         if(hrs === "00:00") return 24*60
-		let min = parseInt(hrs.substring(0, 2))*60 + parseInt(hrs.substring(3))
+        let seg = hrs.split(":")
+		let min = parseInt(seg[0])*60 + parseInt(seg[1])
         return min
 	}
 
@@ -30,7 +31,6 @@ var findMinDifference = function(timePoints) {
         let diff = calculate(ar[i], ar[i + 1])
         min = Math.min(diff, min)
     }
-
     return min 
 };
 
